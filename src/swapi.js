@@ -6,20 +6,6 @@ function getMovieCount() {
     .then((res) => res.count);
 }
 
-/* function listMovies() {
-  return fetch('https://swapi.info/api/films/')
-    .then((res) => res.json())
-    .then((res) => res.results)
-    .then((movies) =>
-      movies.map((movie) => ({
-        name: movie.title,
-        director: movie.director,
-        release: movie.release_date,
-        episodeID: movie.episode_id,
-      }))
-    );
-} */
-
 async function listMovies() {
   try {
     const res = await fetch('https://swapi.info/api/films/');
@@ -28,10 +14,7 @@ async function listMovies() {
     }
     const data = await res.json();
     // Comprovem que hi hagi resposta i que sigui un array
-    if (!data.results || !Array.isArray(data.results)) {
-      throw new Error('API did not return an array');
-    }
-    const movies = data.results.map((movie) => ({
+    const movies = data.map((movie) => ({
       name: movie.title,
       director: movie.director,
       release: movie.release_date,
